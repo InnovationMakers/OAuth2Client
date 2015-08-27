@@ -341,7 +341,7 @@ NSString * const kNXOAuth2AccountStoreAccountType = @"kNXOAuth2AccountStoreAccou
 
 #pragma mark Handle OAuth Redirects
 
-- (BOOL)handleRedirectURL:(NSURL *)aURL;
+- (BOOL)handleRedirectURL:(NSURL *)aURL ForAccountType:(NSString*)accountType;
 {
     __block NSURL *fixedRedirectURL = nil;
     NSSet *accountTypes;
@@ -372,12 +372,12 @@ NSString * const kNXOAuth2AccountStoreAccountType = @"kNXOAuth2AccountStoreAccou
         }];
     }
 
-    for (NSString *accountType in accountTypes) {
+//    for (NSString *accountType in accountTypes) {
         NXOAuth2Client *client = [self pendingOAuthClientForAccountType:accountType];
         if ([client openRedirectURL:fixedRedirectURL]) {
             return YES;
         }
-    }
+//    }
     return NO;
 }
 
